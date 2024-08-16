@@ -15,7 +15,9 @@ int main() {
     for (int i = 0; i < number; i++) {
         char word;
         scanf(" %c", &word);
-        word = tolower(word);
+        if (word >= 65 && word <= 90) {
+            word += 32;
+        }
         int index = word - 'a';
 
         if (count[index] == 0) {
