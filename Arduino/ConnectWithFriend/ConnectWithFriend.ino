@@ -8,7 +8,7 @@
 #include <MQTTClient.h>
 
 const char WIFI_SSID[] = "iPhone 12 Pro Max";          // CHANGE TO YOUR WIFI SSID
-const char WIFI_PASSWORD[] = "";  // CHANGE TO YOUR WIFI PASSWORD
+const char WIFI_PASSWORD[] = "Natthapong_34";  // CHANGE TO YOUR WIFI PASSWORD
 
 const char MQTT_BROKER_ADRRESS[] = "mqtt-dashboard.com";  // CHANGE TO MQTT BROKER'S ADDRESS
 const int MQTT_PORT = 1883;
@@ -17,8 +17,8 @@ const char MQTT_USERNAME[] = "it66070101";                        // CHANGE IT I
 const char MQTT_PASSWORD[] = "";                        // CHANGE IT IF REQUIRED, empty if not required
 
 // The MQTT topics that Arduino should publish/subscribe
-const char PUBLISH_TOPIC[] = "phycom/it66070101";    // CHANGE IT AS YOU DESIRE
-const char SUBSCRIBE_TOPIC[] = "phycom/it66070101";  // CHANGE IT AS YOU DESIRE
+const char PUBLISH_TOPIC[] = "phycom/it66070100";    // CHANGE IT AS YOU DESIRE
+const char SUBSCRIBE_TOPIC[] = "phycom/it66070100";  // CHANGE IT AS YOU DESIRE
 
 const int PUBLISH_INTERVAL = 5000;  // 5 seconds
 
@@ -29,7 +29,6 @@ unsigned long lastPublishTime = 0;
 
 void setup() {
   Serial.begin(9600); // IP 172.20.10.12
-  pinMode(9, OUTPUT);
 
   int status = WL_IDLE_STATUS;
   while (status != WL_CONNECTED) {
@@ -51,10 +50,10 @@ void setup() {
 void loop() {
   mqtt.loop();
 
-  // if (millis() - lastPublishTime > PUBLISH_INTERVAL) {
-  //   sendToMQTT();
-  //   lastPublishTime = millis();
-  // }
+  if (millis() - lastPublishTime > PUBLISH_INTERVAL) {
+    sendToMQTT();
+    lastPublishTime = millis();
+  }
 }
 
 void connectToMQTT() {
@@ -89,8 +88,8 @@ void connectToMQTT() {
 
 void sendToMQTT() {
 
-  int val = millis();
-  //int val = analogRead(A0);
+  // int val = millis();
+  int val = analogRead(A0);
   String val_str = String(val);
 
   // Convert the string to a char array for MQTT publishing
