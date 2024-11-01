@@ -6,7 +6,7 @@ void loop() {
   int analogValue = analogRead(A0);
   float Vout = (analogValue / 1023.0) * 5;
   float R1 = 10000;  // 10kΩ
-  float R_thermistor = (R1 * (5.0 - Vout)) / Vout;
+  float R_thermistor = (R1 * (5.0 - Vout)) / Vout;Í
 
   // Calculate temperature using Beta parameter equation
   float temperature = betaCalculation(R_thermistor);
